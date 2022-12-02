@@ -60,29 +60,19 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: product });
 });
 
-// @desc      Delete bootcamp
-// @route     DELETE /api/v1/bootcamps/:id
+// @desc      deleteProduct
+// @route     DELETE /api/v1/products/:id
 // @access    Private
-exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
-  const bootcamp = await Bootcamp.findById(req.params.id);
+exports.deleteProduct = asyncHandler(async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
 
-  if (!bootcamp) {
+  if (!product) {
     return next(
-      new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
+      new ErrorResponse(`product not found with id of ${req.params.id}`, 404)
     );
   }
 
-  // // Make sure user is bootcamp owner
-  // if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
-  //   return next(
-  //     new ErrorResponse(
-  //       `User ${req.params.id} is not authorized to delete this bootcamp`,
-  //       401
-  //     )
-  //   );
-  // }
-
-  bootcamp.remove();
+  product.remove();
 
   res.status(200).json({ success: true, data: {} });
 });

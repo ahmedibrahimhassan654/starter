@@ -6,10 +6,14 @@ const {
   createProduct,
   gitSingleProduct,
   updateProduct,
+  deleteProduct,
 } = require("../controllers/products");
 
 router.route("/").get(getAllProducts).post(createProduct);
 //router.route("/static").get(getAllProductsStatic);
-router.route("/:id").get(gitSingleProduct).put(updateProduct);
-//.delete(deleteProduct);
+router
+  .route("/:id")
+  .get(gitSingleProduct)
+  .put(updateProduct)
+  .delete(deleteProduct);
 module.exports = router;
