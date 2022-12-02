@@ -1,6 +1,10 @@
-const errorHandlerMiddleware = async (err, req, res, next) => {
-  console.log(err)
-  return res.status(500).json({ msg: 'Something went wrong, please try again' })
+class ErrorResponse extends Error {
+  constructor(message, statusCode) {
+    super(message);
+    this.statusCode = statusCode;
+
+    Error.captureStackTrace(this, this.constructor);
+  }
 }
 
-module.exports = errorHandlerMiddleware
+module.exports = ErrorResponse;

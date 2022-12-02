@@ -1,4 +1,5 @@
 const asyncHandler = require("../middleware/async");
+const ErrorResponse = require("../middleware/error-handler");
 const Product = require("../models/product");
 // @desc      Get all productts
 // @route     GET /api/v1/products
@@ -12,7 +13,7 @@ exports.getAllProducts = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc      Create new bootcamp
+// @desc      Create new product
 // @route     POST /api/v1/products
 // @access    Private
 exports.createProduct = asyncHandler(async (req, res, next) => {
@@ -22,4 +23,19 @@ exports.createProduct = asyncHandler(async (req, res, next) => {
     success: true,
     data: product,
   });
+});
+
+// @desc      Get single product
+// @route     GET /api/v1/products/:id
+// @access    Public
+exports.gitSingleProduct = asyncHandler(async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
+
+  if (!product) {
+    return next(
+      new ErrorResponse(`product not found with id of ${req.params.id}`, 404)
+    );
+  }
+
+  res.status(200).json({ success: true, data: product });
 });

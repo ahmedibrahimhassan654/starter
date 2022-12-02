@@ -9,7 +9,7 @@ const connectDB = require("./db/connect");
 const productsRouter = require("./routes/products");
 
 const notFoundMiddleware = require("./middleware/not-found");
-const errorMiddleware = require("./middleware/error-handler");
+const errorMiddleware = require("./middleware/error");
 
 // middleware
 app.use(express.json());
