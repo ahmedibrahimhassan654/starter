@@ -7,12 +7,14 @@ const app = express();
 const connectDB = require("./db/connect");
 
 const productsRouter = require("./routes/products");
+const ordersRouter = require("./routes/order");
 
 const notFoundMiddleware = require("./middleware/not-found");
 const errorMiddleware = require("./middleware/error");
 
 // middleware
 app.use(express.json());
+// Dev logging middleware
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
@@ -24,7 +26,7 @@ app.get("/", (req, res) => {
 
 // products route
 app.use("/api/v1/products", productsRouter);
-// Dev logging middleware
+app.use("/api/v1/orders", ordersRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
