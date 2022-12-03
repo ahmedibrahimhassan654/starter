@@ -14,7 +14,7 @@ const orderSchema = new mongoose.Schema({
     required: [true, "product quantity must be provided"],
   },
   brand: {
-    type: Number,
+    type: String,
     required: [true, "product brand must be provided"],
   },
   createdAt: {

@@ -23,18 +23,16 @@ exports.createOrder = asyncHandler(async (req, res, next) => {
   const results = [];
   fs.createReadStream("order1.csv")
     .pipe(csv({}))
-    .on("data", (data) => {
+    .on("data", async (data) => {
       results.push(data);
-      Order.insertMany(results);
+    })
+    .on("end", async () => {
       res.status(201).json({
         success: true,
         data: results,
       });
-    })
-    .on("end", () => {
-      console.log(results);
     });
-  // csvtojson()
+
   //   .fromFile("order1.csv")
   //   .then((jsonObj) => {
   //     console.log(jsonObj);
