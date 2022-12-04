@@ -7,4 +7,4 @@
   you can find the document on this link
   [postman documentation ](https://documenter.getpostman.com/view/7173620/2s8YzMXQmo)
 
-- the project is puplished in docker container on port 8080
+- the project is published in docker container on port 8080
